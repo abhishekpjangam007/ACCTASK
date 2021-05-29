@@ -1,0 +1,5 @@
+game id:-4072975
+
+interstatial id:-interstitial
+
+banner id:-banner
