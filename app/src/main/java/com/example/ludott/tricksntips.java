@@ -62,6 +62,7 @@ public class tricksntips extends AppCompatActivity {
             public void onAdLoaded(Ad ad) {
                 // Interstitial ad is loaded and ready to be displayed
 
+                startActivity(new Intent(tricksntips.this, trickstowin.class));
                 // Show the ad
                 interstitialAd.show();
             }
@@ -78,17 +79,12 @@ public class tricksntips extends AppCompatActivity {
 
             }
         };
-        progressDialog = new ProgressDialog(tricksntips.this);
-        progressDialog.show();
-        progressDialog.setContentView(R.layout.progress_dialog);
-        progressDialog.getWindow().setBackgroundDrawableResource(
-                android.R.color.transparent
-        );
 
-        interstitialAd.loadAd(
-                interstitialAd.buildLoadAdConfig()
-                        .withAdListener(interstitialAdListener)
-                        .build());
+
+//        interstitialAd.loadAd(
+//                interstitialAd.buildLoadAdConfig()
+//                        .withAdListener(interstitialAdListener)
+//                        .build());
         ///////
         UnityAds.initialize(tricksntips.this,unityGameID,testMode);
         IUnityAdsListener unityAdsListener = new IUnityAdsListener() {
@@ -157,18 +153,18 @@ public class tricksntips extends AppCompatActivity {
      backkk.setOnClickListener(new View.OnClickListener() {
          @Override
          public void onClick(View v) {
-             startActivity(new Intent(tricksntips.this, trickstowin.class));
-//             progressDialog = new ProgressDialog(tricksntips.this);
-//             progressDialog.show();
-//             progressDialog.setContentView(R.layout.progress_dialog);
-//             progressDialog.getWindow().setBackgroundDrawableResource(
-//                     android.R.color.transparent
-//             );
+
 //
-//             interstitialAd.loadAd(
-//                     interstitialAd.buildLoadAdConfig()
-//                             .withAdListener(interstitialAdListener)
-//                             .build());
+             progressDialog = new ProgressDialog(tricksntips.this);
+                progressDialog.show();
+                progressDialog.setContentView(R.layout.progress_dialog);
+                progressDialog.getWindow().setBackgroundDrawableResource(
+                        android.R.color.transparent
+                );
+             interstitialAd.loadAd(
+                     interstitialAd.buildLoadAdConfig()
+                             .withAdListener(interstitialAdListener)
+                             .build());
 
 
 
@@ -283,15 +279,15 @@ public class tricksntips extends AppCompatActivity {
                     @Override
                     public void onInterstitialDisplayed(Ad ad) {
                         // Interstitial ad displayed callback
-
+                        progressDialog.dismiss();
                     }
 
                     @Override
                     public void onInterstitialDismissed(Ad ad) {
                         // Interstitial dismissed callback
 
-                        startActivity(new Intent(tricksntips.this, MainActivity.class));
-                        progressDialog.dismiss();
+//                        startActivity(new Intent(tricksntips.this, MainActivity.class));
+
                     }
 
                     @Override
@@ -304,6 +300,7 @@ public class tricksntips extends AppCompatActivity {
                     public void onAdLoaded(Ad ad) {
                         // Interstitial ad is loaded and ready to be displayed
 
+                        startActivity(new Intent(tricksntips.this, MainActivity.class));
                         // Show the ad
                         interstitialAd.show();
                     }
@@ -320,13 +317,13 @@ public class tricksntips extends AppCompatActivity {
 
                     }
                 };
+
                 progressDialog = new ProgressDialog(tricksntips.this);
                 progressDialog.show();
                 progressDialog.setContentView(R.layout.progress_dialog);
                 progressDialog.getWindow().setBackgroundDrawableResource(
                         android.R.color.transparent
                 );
-
                 interstitialAd.loadAd(
                         interstitialAd.buildLoadAdConfig()
                                 .withAdListener(interstitialAdListener)

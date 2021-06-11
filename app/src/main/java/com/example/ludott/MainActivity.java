@@ -69,14 +69,15 @@ public class MainActivity<unityAdsListenr> extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
-        AudienceNetworkAds.initialize(this);
-
 ///////////////////////////////////////////////////////////////////
+
         adView=new AdView(this,"IMG_16_9_APP_INSTALL#YOUR_PLACEMENT_ID", AdSize.BANNER_HEIGHT_50);
         LinearLayout adContainer = (LinearLayout) findViewById(R.id.banner_container);
         adContainer.addView(adView);
         adView.loadAd();
+//        AudienceNetworkAds.initialize(this);
+
+
         //
         AudienceNetworkAds.initialize(this);
         interstitialAd = new InterstitialAd(this, "CAROUSEL_IMG_SQUARE_APP_INSTALL#1116934268700829_1118606095200313");
@@ -85,7 +86,7 @@ public class MainActivity<unityAdsListenr> extends AppCompatActivity {
             @Override
             public void onInterstitialDisplayed(Ad ad) {
                 // Interstitial ad displayed callback
-                progressDialog.dismiss();
+//                progressDialog.dismiss();
             }
 
             @Override
@@ -119,18 +120,21 @@ public class MainActivity<unityAdsListenr> extends AppCompatActivity {
                 // Ad impression logged callback
 
             }
-        };
-        progressDialog = new ProgressDialog(MainActivity.this);
-        progressDialog.show();
 
-        progressDialog.setContentView(R.layout.progress_dialog);
-        progressDialog.getWindow().setBackgroundDrawableResource(
-                android.R.color.transparent
-        );
-        interstitialAd.loadAd(
-                interstitialAd.buildLoadAdConfig()
-                        .withAdListener(interstitialAdListener1)
-                        .build());
+        };
+//        progressDialog = new ProgressDialog(MainActivity.this);
+//        progressDialog.show();
+//
+//        progressDialog.setContentView(R.layout.progress_dialog);
+//        progressDialog.getWindow().setBackgroundDrawableResource(
+//                android.R.color.transparent
+//        );
+//        interstitialAd.loadAd(
+//                interstitialAd.buildLoadAdConfig()
+//                        .withAdListener(interstitialAdListener1)
+//                        .build());
+
+
 
 
 
@@ -173,101 +177,29 @@ public class MainActivity<unityAdsListenr> extends AppCompatActivity {
 
            }
 
-    private void DisplayInterstitialAd () {
-        if (UnityAds.isReady(interstatial_id)){
-            UnityAds.show(MainActivity.this,interstatial_id);
-        }
-    }
-int counter = 0;
+
     @Override
     public void onBackPressed() {
 
-        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        {
+            new AlertDialog.Builder(this)
+                    .setIcon(android.R.drawable.ic_dialog_alert)
+                    .setTitle("Closing")
+                    .setMessage("Are you sure you want to Exit?")
+                    .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+finishAffinity();
 
-        builder.setMessage("Are you sure do want to Exit?")
-        .setCancelable(false)
-                .setPositiveButton("Yes", new DialogInterface.OnClickListener()
-                {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
+                        }
 
-
-
-//                        UnityAds.show(MainActivity.this,interstatial_id);
-//                        UnityAds.load(interstatial_id);
-
-                        finishAffinity();
-                    }
-
-                })
-                .setNegativeButton("No", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-
-                        InterstitialAdListener interstitialAdListener = new InterstitialAdListener() {
-                            @Override
-                            public void onInterstitialDisplayed(Ad ad) {
-                                // Interstitial ad displayed callback
-
-                            }
-
-                            @Override
-                            public void onInterstitialDismissed(Ad ad) {
-                                // Interstitial dismissed callback
-
-                            }
-
-                            @Override
-                            public void onError(Ad ad, AdError adError) {
-                                // Ad error callback
-
-                            }
-
-                            @Override
-                            public void onAdLoaded(Ad ad) {
-                                // Interstitial ad is loaded and ready to be displayed
-
-                                // Show the ad
-                                interstitialAd.show();
-                            }
-
-                            @Override
-                            public void onAdClicked(Ad ad) {
-                                // Ad clicked callback
-
-                            }
-
-                            @Override
-                            public void onLoggingImpression(Ad ad) {
-                                // Ad impression logged callback
-
-                            }
-                        };
-                        interstitialAd.loadAd(
-                                interstitialAd.buildLoadAdConfig()
-                                        .withAdListener(interstitialAdListener)
-                                        .build());
-                        dialog.cancel();
-//                   UnityAds.show(MainActivity.this,interstatial_id);
-//                       UnityAds.load(interstatial_id);
-                        interstitialAd.loadAd(
-                                interstitialAd.buildLoadAdConfig()
-                                        .withAdListener(interstitialAdListener)
-                                        .build());
-                    }
-
-                });
-//                UnityAds.show(MainActivity.this,interstatial_id);
-//                UnityAds.load(interstatial_id);
-        AlertDialog alertDialog = builder.create();
-        alertDialog.show();
-    }
-    @Override
-    protected void onDestroy() {
-        if (interstitialAd != null) {
-            interstitialAd.destroy();
+                    })
+                    .setNegativeButton("No", null)
+                    .show();
         }
-        super.onDestroy();
     }
+
+
+
 }
 

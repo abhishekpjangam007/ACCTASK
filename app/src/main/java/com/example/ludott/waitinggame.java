@@ -66,6 +66,7 @@ TextView wg;
             public void onAdLoaded(Ad ad) {
                 // Interstitial ad is loaded and ready to be displayed
 
+                startActivity(new Intent(waitinggame.this, tricksntips.class));
                 // Show the ad
                 interstitialAd.show();
             }
@@ -144,7 +145,16 @@ TextView wg;
     bckwg.setOnClickListener(new View.OnClickListener() {
         @Override
         public void onClick(View v) {
-            startActivity(new Intent(waitinggame.this, tricksntips.class));
+            progressDialog = new ProgressDialog(waitinggame.this);
+            progressDialog.show();
+            progressDialog.setContentView(R.layout.progress_dialog);
+            progressDialog.getWindow().setBackgroundDrawableResource(
+                    android.R.color.transparent
+            );
+            interstitialAd.loadAd(
+                    interstitialAd.buildLoadAdConfig()
+                            .withAdListener(interstitialAdListener)
+                            .build());
 
         }
     });
@@ -154,68 +164,69 @@ TextView wg;
         hmw.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                InterstitialAdListener interstitialAdListener = new InterstitialAdListener() {
-//                    @Override
-//                    public void onInterstitialDisplayed(Ad ad) {
-//                        // Interstitial ad displayed callback
-//
-//                    }
-//
-//                    @Override
-//                    public void onInterstitialDismissed(Ad ad) {
-//                        // Interstitial dismissed callback
+                InterstitialAdListener interstitialAdListener = new InterstitialAdListener() {
+                    @Override
+                    public void onInterstitialDisplayed(Ad ad) {
+                        // Interstitial ad displayed callback
+                        progressDialog.dismiss();
+                    }
+
+                    @Override
+                    public void onInterstitialDismissed(Ad ad) {
+                        // Interstitial dismissed callback
 //                        startActivity(new Intent(waitinggame.this, MainActivity.class));
 //                        progressDialog.dismiss();
-//
-//                    }
-//
-//                    @Override
-//                    public void onError(Ad ad, AdError adError) {
-//                        // Ad error callback
-//
-//                    }
-//
-//                    @Override
-//                    public void onAdLoaded(Ad ad) {
-//                        // Interstitial ad is loaded and ready to be displayed
-//
-//                        // Show the ad
-//                        interstitialAd.show();
-//                    }
-//
-//                    @Override
-//                    public void onAdClicked(Ad ad) {
-//                        // Ad clicked callback
-//
-//                    }
-//
-//                    @Override
-//                    public void onLoggingImpression(Ad ad) {
-//                        // Ad impression logged callback
-//
-//                    }
-//                };
-//                progressDialog = new ProgressDialog(waitinggame.this);
-//                progressDialog.show();
-//                progressDialog.setContentView(R.layout.progress_dialog);
-//                progressDialog.getWindow().setBackgroundDrawableResource(
-//                        android.R.color.transparent
-//                );
-//
-//                interstitialAd.loadAd(
-//                        interstitialAd.buildLoadAdConfig()
-//                                .withAdListener(interstitialAdListener)
-//                                .build());
-                startActivity(new Intent(waitinggame.this, MainActivity.class));
+
+                    }
+
+                    @Override
+                    public void onError(Ad ad, AdError adError) {
+                        // Ad error callback
+
+                    }
+
+                    @Override
+                    public void onAdLoaded(Ad ad) {
+                        // Interstitial ad is loaded and ready to be displayed
+
+                        startActivity(new Intent(waitinggame.this, MainActivity.class));
+                        // Show the ad
+                        interstitialAd.show();
+                    }
+
+                    @Override
+                    public void onAdClicked(Ad ad) {
+                        // Ad clicked callback
+
+                    }
+
+                    @Override
+                    public void onLoggingImpression(Ad ad) {
+                        // Ad impression logged callback
+
+                    }
+                };
+
+                progressDialog = new ProgressDialog(waitinggame.this);
+                progressDialog.show();
+                progressDialog.setContentView(R.layout.progress_dialog);
+                progressDialog.getWindow().setBackgroundDrawableResource(
+                        android.R.color.transparent
+                );
+                interstitialAd.loadAd(
+                        interstitialAd.buildLoadAdConfig()
+                                .withAdListener(interstitialAdListener)
+                                .build());
+
 
 
             }
         });
 
         wg=findViewById(R.id.wgtxt);
-        String para="●Playing the waiting game in Ludo King can have amazing benefits. For example, if your pieces are placed onstar-shaped\n " +
+        String para="●\tPlaying the waiting game in Ludo King can have amazing benefits. For example, if your pieces are placed onstar-shaped\n " +
                 "safe zone on the board and a bad dice roll has a chance of exposing you to your opponents, do not take the chance.\n " +
-                "●Instead,wait it out till you have a good dice roll and keep distance or try to land yourself on the opponent’s piece."+
+                "●\tInstead,wait it out till you have a good dice roll and keep distance or try to land yourself on the opponent’s piece."+
                 "\n"+
                 "\n";
         wg.setText(para);

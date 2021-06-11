@@ -41,8 +41,8 @@ public class history extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         progressDialog = new ProgressDialog(this);
         AudienceNetworkAds.initialize(this);
+//        interstitialAd = new InterstitialAd(this, "CAROUSEL_IMG_SQUARE_APP_INSTALL#1116934268700829_1118606095200313");
         interstitialAd = new InterstitialAd(this, "CAROUSEL_IMG_SQUARE_APP_INSTALL#1116934268700829_1118606095200313");
-
         InterstitialAdListener interstitialAdListener = new InterstitialAdListener() {
             @Override
             public void onInterstitialDisplayed(Ad ad) {
@@ -55,8 +55,7 @@ public class history extends AppCompatActivity {
             @Override
             public void onInterstitialDismissed(Ad ad) {
                 // Interstitial dismissed callback
-//               Intent intent=new Intent(history.this,MainActivity.class);
-//                startActivity(intent);
+
 
 
             }
@@ -70,7 +69,14 @@ public class history extends AppCompatActivity {
             @Override
             public void onAdLoaded(Ad ad) {
                 // Interstitial ad is loaded and ready to be displayed
-
+                Intent intent=new Intent(history.this,MainActivity.class);
+                startActivity(intent);
+//                progressDialog = new ProgressDialog(history.this);
+//                progressDialog.show();
+//
+//                progressDialog.setContentView(R.layout.progress_dialog);
+//                progressDialog.getWindow().setBackgroundDrawableResource(
+//                        android.R.color.transparent);
                 // Show the ad
                 interstitialAd.show();
 
@@ -88,17 +94,17 @@ public class history extends AppCompatActivity {
 
             }
         };
-        progressDialog = new ProgressDialog(history.this);
-        progressDialog.show();
-
-        progressDialog.setContentView(R.layout.progress_dialog);
-        progressDialog.getWindow().setBackgroundDrawableResource(
-                android.R.color.transparent
-        );
-        interstitialAd.loadAd(
-                interstitialAd.buildLoadAdConfig()
-                        .withAdListener(interstitialAdListener)
-                        .build());
+//        progressDialog = new ProgressDialog(history.this);
+//        progressDialog.show();
+//
+//        progressDialog.setContentView(R.layout.progress_dialog);
+//        progressDialog.getWindow().setBackgroundDrawableResource(
+//                android.R.color.transparent
+//        );
+//        interstitialAd.loadAd(
+//                interstitialAd.buildLoadAdConfig()
+//                        .withAdListener(interstitialAdListener)
+//                        .build());
         /////////////////////////////////////////////////////////////////
 
         setContentView(R.layout.activity_history);
@@ -196,11 +202,64 @@ public class history extends AppCompatActivity {
         LinearLayout adContainer = (LinearLayout) findViewById(R.id.banner_container);
         adContainer.addView(adView);
         adView.loadAd();
-
+//////////////////////////////////////////////////////////////////////////
         bck=findViewById(R.id.back);
         final loading loading = new loading(history.this);
         final MediaPlayer mediaplayer = MediaPlayer.create(this,R.raw.click);
+        AudienceNetworkAds.initialize(this);
+        interstitialAd = new InterstitialAd(this, "CAROUSEL_IMG_SQUARE_APP_INSTALL#1116934268700829_1118606095200313");
 
+        InterstitialAdListener interstitialAdListener1 = new InterstitialAdListener() {
+            @Override
+            public void onInterstitialDisplayed(Ad ad) {
+                // Interstitial ad displayed callback
+
+                progressDialog.dismiss();
+
+            }
+
+            @Override
+            public void onInterstitialDismissed(Ad ad) {
+                // Interstitial dismissed callback
+
+
+
+            }
+
+            @Override
+            public void onError(Ad ad, AdError adError) {
+                // Ad error callback
+
+            }
+
+            @Override
+            public void onAdLoaded(Ad ad) {
+                // Interstitial ad is loaded and ready to be displayed
+                Intent intent=new Intent(history.this,MainActivity.class);
+                startActivity(intent);
+//                progressDialog = new ProgressDialog(history.this);
+//                progressDialog.show();
+//
+//                progressDialog.setContentView(R.layout.progress_dialog);
+//                progressDialog.getWindow().setBackgroundDrawableResource(
+//                        android.R.color.transparent);
+                // Show the ad
+                interstitialAd.show();
+
+            }
+
+            @Override
+            public void onAdClicked(Ad ad) {
+                // Ad clicked callback
+
+            }
+
+            @Override
+            public void onLoggingImpression(Ad ad) {
+                // Ad impression logged callback
+
+            }
+        };
         bck.setOnClickListener(new View.OnClickListener() {
 
             @Override
@@ -210,19 +269,20 @@ public class history extends AppCompatActivity {
 //                    Intent intent = new Intent(history.this, MainActivity.class);
 //                    startActivity(intent);
 
-                Intent intent=new Intent(history.this,MainActivity.class);
-//                progressDialog = new ProgressDialog(history.this);
-//                progressDialog.show();
-//
-//                progressDialog.setContentView(R.layout.progress_dialog);
-//                progressDialog.getWindow().setBackgroundDrawableResource(
-//                        android.R.color.transparent
-//                );
-//                interstitialAd.loadAd(
-//                        interstitialAd.buildLoadAdConfig()
-//                                .withAdListener(interstitialAdListener)
-//                                .build());
-                startActivity(intent);
+//                Intent intent=new Intent(history.this,MainActivity.class);
+
+                progressDialog = new ProgressDialog(history.this);
+                progressDialog.show();
+
+                progressDialog.setContentView(R.layout.progress_dialog);
+                progressDialog.getWindow().setBackgroundDrawableResource(
+                        android.R.color.transparent
+                );
+                interstitialAd.loadAd(
+                        interstitialAd.buildLoadAdConfig()
+                                .withAdListener(interstitialAdListener)
+                                .build());
+//                startActivity(intent);
 //                progressDialog = new ProgressDialog(history.this);
 //                progressDialog.show();
 //
@@ -286,7 +346,6 @@ public class history extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        super.onBackPressed();
 
         Intent intent = new Intent(history.this,MainActivity.class);
         startActivity(intent);

@@ -39,7 +39,7 @@ TextView eg;
         setContentView(R.layout.activity_escapegame);
         progressDialog = new ProgressDialog(this);
         AudienceNetworkAds.initialize(this);
-        interstitialAd = new InterstitialAd(this, "IMG_16_9_APP_INSTALL#YOUR_PLACEMENT_ID");
+        interstitialAd = new InterstitialAd(this, "CAROUSEL_IMG_SQUARE_APP_INSTALL#1116934268700829_1118606095200313");
 
         InterstitialAdListener interstitialAdListener = new InterstitialAdListener() {
             @Override
@@ -67,6 +67,14 @@ TextView eg;
             @Override
             public void onAdLoaded(Ad ad) {
                 // Interstitial ad is loaded and ready to be displayed
+//                progressDialog = new ProgressDialog(escapegame.this);
+//                progressDialog.show();
+//                progressDialog.setContentView(R.layout.progress_dialog);
+//                progressDialog.getWindow().setBackgroundDrawableResource(
+//                        android.R.color.transparent
+//                );
+                Intent intent = new Intent(escapegame.this, tricksntips.class);
+                startActivity(intent);
 
                 // Show the ad
                 interstitialAd.show();
@@ -149,18 +157,18 @@ TextView eg;
         bckeg.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                interstitialAd.loadAd(
-//                        interstitialAd.buildLoadAdConfig()
-//                                .withAdListener(interstitialAdListener)
-//                                .build());
-//                progressDialog = new ProgressDialog(escapegame.this);
-//                progressDialog.show();
-//                progressDialog.setContentView(R.layout.progress_dialog);
-//                progressDialog.getWindow().setBackgroundDrawableResource(
-//                        android.R.color.transparent
-//                );
-                Intent intent = new Intent(escapegame.this, tricksntips.class);
-                startActivity(intent);
+                interstitialAd.loadAd(
+                        interstitialAd.buildLoadAdConfig()
+                                .withAdListener(interstitialAdListener)
+                                .build());
+                progressDialog = new ProgressDialog(escapegame.this);
+                progressDialog.show();
+                progressDialog.setContentView(R.layout.progress_dialog);
+                progressDialog.getWindow().setBackgroundDrawableResource(
+                        android.R.color.transparent
+                );
+//                Intent intent = new Intent(escapegame.this, tricksntips.class);
+//                startActivity(intent);
 
 
 //
@@ -172,68 +180,74 @@ TextView eg;
         hm.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                InterstitialAdListener interstitialAdListener = new InterstitialAdListener() {
-//                    @Override
-//                    public void onInterstitialDisplayed(Ad ad) {
-//                        // Interstitial ad displayed callback
-//
-//                    }
-//
-//                    @Override
-//                    public void onInterstitialDismissed(Ad ad) {
-//                        // Interstitial dismissed callback
-//
-//                        progressDialog.dismiss();
-//
+                InterstitialAdListener interstitialAdListener = new InterstitialAdListener() {
+                    @Override
+                    public void onInterstitialDisplayed(Ad ad) {
+                        // Interstitial ad displayed callback
+
+                    }
+
+                    @Override
+                    public void onInterstitialDismissed(Ad ad) {
+                        // Interstitial dismissed callback
+
+                        progressDialog.dismiss();
+
 //                        Intent intent1 = new Intent(escapegame.this, MainActivity.class);
 //                        startActivity(intent1);
-//                    }
-//
-//                    @Override
-//                    public void onError(Ad ad, AdError adError) {
-//                        // Ad error callback
-//
-//                    }
-//
-//                    @Override
-//                    public void onAdLoaded(Ad ad) {
-//                        // Interstitial ad is loaded and ready to be displayed
-//
-//                        // Show the ad
-//                        interstitialAd.show();
-//                    }
-//
-//                    @Override
-//                    public void onAdClicked(Ad ad) {
-//                        // Ad clicked callback
-//
-//                    }
-//
-//                    @Override
-//                    public void onLoggingImpression(Ad ad) {
-//                        // Ad impression logged callback
-//
-//                    }
-//                };
-//                interstitialAd.loadAd(
-//                        interstitialAd.buildLoadAdConfig()
-//                                .withAdListener(interstitialAdListener)
-//                                .build());
-//                progressDialog = new ProgressDialog(escapegame.this);
-//                progressDialog.show();
-//                progressDialog.setContentView(R.layout.progress_dialog);
-//                progressDialog.getWindow().setBackgroundDrawableResource(
-//                        android.R.color.transparent
-//                );
-                startActivity(new Intent(escapegame.this, MainActivity.class));
+                    }
+
+                    @Override
+                    public void onError(Ad ad, AdError adError) {
+                        // Ad error callback
+
+                    }
+
+                    @Override
+                    public void onAdLoaded(Ad ad) {
+                        // Interstitial ad is loaded and ready to be displayed
+//                        progressDialog = new ProgressDialog(escapegame.this);
+//                        progressDialog.show();
+//                        progressDialog.setContentView(R.layout.progress_dialog);
+//                        progressDialog.getWindow().setBackgroundDrawableResource(
+//                                android.R.color.transparent
+//                        );
+                        startActivity(new Intent(escapegame.this, MainActivity.class));
+                        // Show the ad
+                        interstitialAd.show();
+                    }
+
+                    @Override
+                    public void onAdClicked(Ad ad) {
+                        // Ad clicked callback
+
+                    }
+
+                    @Override
+                    public void onLoggingImpression(Ad ad) {
+                        // Ad impression logged callback
+
+                    }
+                };
+                progressDialog = new ProgressDialog(escapegame.this);
+                        progressDialog.show();
+                        progressDialog.setContentView(R.layout.progress_dialog);
+                        progressDialog.getWindow().setBackgroundDrawableResource(
+                                android.R.color.transparent
+                        );
+                interstitialAd.loadAd(
+                        interstitialAd.buildLoadAdConfig()
+                                .withAdListener(interstitialAdListener)
+                                .build());
+
 
             }
         });
 
         eg=findViewById(R.id.egtxt);
-        String para="●Escaping far means you are separated by your opponent by at least 7 square places.\n" +
-                "●If opponent scores 6 and 1, you will get killed but the chances are  low.\n" +
-                "●Escape with more than 6 spaces at any point in time and you are very less likely to get killed.\n"+
+        String para="●\tEscaping far means you are separated by your opponent by at least 7 square places.\n" +
+                "●\tIf opponent scores 6 and 1, you will get killed but the chances are  low.\n" +
+                "●\tEscape with more than 6 spaces at any point in time and you are very less likely to get killed.\n"+
                 "\n"+
                 "\n";
         eg.setText(para);
@@ -248,7 +262,6 @@ TextView eg;
     @Override
     public void onBackPressed() {
         {
-            super.onBackPressed();
 
             Intent intent = new Intent(escapegame.this,tricksntips.class);
             startActivity(intent);

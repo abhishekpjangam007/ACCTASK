@@ -44,6 +44,7 @@
         android:layout_height="@dimen/_340sdp"
         android:layout_marginTop="32dp"
         android:scrollbars="vertical"
+        android:gravity="left"
         android:text=""
         android:textColor="@color/black"
         android:textSize="@dimen/_15sdp"

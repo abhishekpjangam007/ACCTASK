@@ -34,7 +34,17 @@ private ImageView bck,nxt,lr,hm;
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_rules);
+
         progressDialog = new ProgressDialog(this);
+
+        adView=new AdView(this,"IMG_16_9_APP_INSTALL#YOUR_PLACEMENT_ID", AdSize.BANNER_HEIGHT_50);
+        LinearLayout adContainer = (LinearLayout) findViewById(R.id.banner_container);
+        adContainer.addView(adView);
+        adView.loadAd();
+
+
+
+
         AudienceNetworkAds.initialize(this);
         interstitialAd = new InterstitialAd(this, "CAROUSEL_IMG_SQUARE_APP_INSTALL#1116934268700829_1118606095200313");
 
@@ -64,6 +74,8 @@ private ImageView bck,nxt,lr,hm;
             public void onAdLoaded(Ad ad) {
                 // Interstitial ad is loaded and ready to be displayed
 
+                Intent intent=new Intent(rules.this,history.class);
+                startActivity(intent);
                 // Show the ad
                 interstitialAd.show();
             }
@@ -80,41 +92,35 @@ private ImageView bck,nxt,lr,hm;
 
             }
         };
-        progressDialog = new ProgressDialog(rules.this);
-        progressDialog.show();
 
-        progressDialog.setContentView(R.layout.progress_dialog);
-        progressDialog.getWindow().setBackgroundDrawableResource(
-                android.R.color.transparent
-        );
-        interstitialAd.loadAd(
-                interstitialAd.buildLoadAdConfig()
-                        .withAdListener(interstitialAdListener)
-                        .build());
+//        interstitialAd.loadAd(
+//                interstitialAd.buildLoadAdConfig()
+//                        .withAdListener(interstitialAdListener)
+//                        .build());
         ///////
-        UnityAds.initialize(rules.this, unityGameID, testMode);
-        //UNITY
-        IUnityAdsListener unityAdsListener = new IUnityAdsListener() {
-            @Override
-            public void onUnityAdsReady(String s) {
-
-            }
-
-            @Override
-            public void onUnityAdsStart(String s) {
-
-            }
-
-            @Override
-            public void onUnityAdsFinish(String s, UnityAds.FinishState finishState) {
-
-            }
-
-            @Override
-            public void onUnityAdsError(UnityAds.UnityAdsError unityAdsError, String s) {
-
-            }
-        };
+//        UnityAds.initialize(rules.this, unityGameID, testMode);
+//        //UNITY
+//        IUnityAdsListener unityAdsListener = new IUnityAdsListener() {
+//            @Override
+//            public void onUnityAdsReady(String s) {
+//
+//            }
+//
+//            @Override
+//            public void onUnityAdsStart(String s) {
+//
+//            }
+//
+//            @Override
+//            public void onUnityAdsFinish(String s, UnityAds.FinishState finishState) {
+//
+//            }
+//
+//            @Override
+//            public void onUnityAdsError(UnityAds.UnityAdsError unityAdsError, String s) {
+//
+//            }
+//        };
 //        UnityAds.setListener(unityAdsListener);
 //        if (UnityAds.isInitialized()){
 //            UnityAds.load(interstatial_id);
@@ -150,10 +156,7 @@ private ImageView bck,nxt,lr,hm;
         //AUDIENCE NETWORK
 //        AudienceNetworkAds.initialize(this);
 
-        adView = new AdView(this, "IMG_16_9_APP_INSTALL#YOUR_PLACEMENT_ID", AdSize.BANNER_HEIGHT_50);
-        LinearLayout adContainer = (LinearLayout) findViewById(R.id.banner_container);
-        adContainer.addView(adView);
-        adView.loadAd();
+
 
         bck = findViewById(R.id.bck);
         final loading loading = new loading(rules.this);
@@ -161,17 +164,17 @@ private ImageView bck,nxt,lr,hm;
         bck.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(rules.this, history.class));
-//                progressDialog = new ProgressDialog(rules.this);
-//                progressDialog.show();
-//                progressDialog.setContentView(R.layout.progress_dialog);
-//                progressDialog.getWindow().setBackgroundDrawableResource(
-//                        android.R.color.transparent
-//                );
-//                interstitialAd.loadAd(
-//                        interstitialAd.buildLoadAdConfig()
-//                                .withAdListener(interstitialAdListener)
-//                                .build());
+
+                progressDialog = new ProgressDialog(rules.this);
+                progressDialog.show();
+                progressDialog.setContentView(R.layout.progress_dialog);
+                progressDialog.getWindow().setBackgroundDrawableResource(
+                        android.R.color.transparent
+                );
+                interstitialAd.loadAd(
+                        interstitialAd.buildLoadAdConfig()
+                                .withAdListener(interstitialAdListener)
+                                .build());
             }
         });
 //next
@@ -204,59 +207,64 @@ private ImageView bck,nxt,lr,hm;
         hm.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                InterstitialAdListener interstitialAdListener = new InterstitialAdListener() {
-//                    @Override
-//                    public void onInterstitialDisplayed(Ad ad) {
-//                        // Interstitial ad displayed callback
-//
-//                    }
-//
-//                    @Override
-//                    public void onInterstitialDismissed(Ad ad) {
-//                        // Interstitial dismissed callback
-//                        startActivity(new Intent(rules.this, MainActivity.class));
-//                        progressDialog.dismiss();
-//                    }
-//
-//                    @Override
-//                    public void onError(Ad ad, AdError adError) {
-//                        // Ad error callback
-//
-//                    }
-//
-//                    @Override
-//                    public void onAdLoaded(Ad ad) {
-//                        // Interstitial ad is loaded and ready to be displayed
-//
-//                        // Show the ad
-//                        interstitialAd.show();
-//                    }
-//
-//                    @Override
-//                    public void onAdClicked(Ad ad) {
-//                        // Ad clicked callback
-//
-//                    }
-//
-//                    @Override
-//                    public void onLoggingImpression(Ad ad) {
-//                        // Ad impression logged callback
-//
-//                    }
-//                };
-//                progressDialog = new ProgressDialog(rules.this);
-//                progressDialog.show();
-//                progressDialog.setContentView(R.layout.progress_dialog);
-//                progressDialog.getWindow().setBackgroundDrawableResource(
-//                        android.R.color.transparent
-//                );
-//
-//                interstitialAd.loadAd(
-//                        interstitialAd.buildLoadAdConfig()
-//                                .withAdListener(interstitialAdListener)
-//                                .build());
-//               mediaplayer3.start();
-                startActivity(new Intent(rules.this, MainActivity.class));
+                InterstitialAdListener interstitialAdListener = new InterstitialAdListener() {
+                    @Override
+                    public void onInterstitialDisplayed(Ad ad) {
+                        // Interstitial ad displayed callback
+
+                    }
+
+                    @Override
+                    public void onInterstitialDismissed(Ad ad) {
+                        // Interstitial dismissed callback
+
+                        progressDialog.dismiss();
+                    }
+
+                    @Override
+                    public void onError(Ad ad, AdError adError) {
+                        // Ad error callback
+
+                    }
+
+                    @Override
+                    public void onAdLoaded(Ad ad) {
+                        // Interstitial ad is loaded and ready to be displayed
+                        Intent intent=new Intent(rules.this,MainActivity.class);
+                        startActivity(intent);
+
+
+
+
+                        // Show the ad
+                        interstitialAd.show();
+                    }
+
+                    @Override
+                    public void onAdClicked(Ad ad) {
+                        // Ad clicked callback
+
+                    }
+
+                    @Override
+                    public void onLoggingImpression(Ad ad) {
+                        // Ad impression logged callback
+
+                    }
+                };
+                progressDialog = new ProgressDialog(rules.this);
+                progressDialog.show();
+                progressDialog.setContentView(R.layout.progress_dialog);
+                progressDialog.getWindow().setBackgroundDrawableResource(
+                        android.R.color.transparent
+                );
+
+                interstitialAd.loadAd(
+                        interstitialAd.buildLoadAdConfig()
+                                .withAdListener(interstitialAdListener)
+                                .build());
+               mediaplayer3.start();
+
 
             }
         });
@@ -284,7 +292,6 @@ private ImageView bck,nxt,lr,hm;
 
     @Override
     public void onBackPressed() {
-        super.onBackPressed();
 
         Intent intent = new Intent(rules.this,history.class);
         startActivity(intent);

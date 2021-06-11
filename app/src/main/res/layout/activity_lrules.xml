@@ -42,6 +42,7 @@
         android:id="@+id/rltxt"
         android:layout_width="@dimen/_185sdp"
         android:layout_height="@dimen/_340sdp"
+        android:gravity="left"
         android:layout_alignParentLeft="true"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"

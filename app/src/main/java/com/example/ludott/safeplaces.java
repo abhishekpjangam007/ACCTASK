@@ -51,7 +51,7 @@ TextView spt;
             @Override
             public void onInterstitialDismissed(Ad ad) {
                 // Interstitial dismissed callback
-
+                progressDialog.dismiss();
 
             }
 
@@ -65,6 +65,7 @@ TextView spt;
             public void onAdLoaded(Ad ad) {
                 // Interstitial ad is loaded and ready to be displayed
 
+                startActivity(new Intent(safeplaces.this, tricksntips.class));
                 // Show the ad
                 interstitialAd.show();
             }
@@ -147,8 +148,16 @@ TextView spt;
         public void onClick(View v) {
             startActivity(new Intent(safeplaces.this, tricksntips.class));
 
-
-
+            progressDialog = new ProgressDialog(safeplaces.this);
+            progressDialog.show();
+            progressDialog.setContentView(R.layout.progress_dialog);
+            progressDialog.getWindow().setBackgroundDrawableResource(
+                    android.R.color.transparent
+            );
+            interstitialAd.loadAd(
+                    interstitialAd.buildLoadAdConfig()
+                            .withAdListener(interstitialAdListener)
+                            .build());
 
         }
     });
@@ -158,58 +167,59 @@ TextView spt;
         hmsp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                InterstitialAdListener interstitialAdListener = new InterstitialAdListener() {
-//                    @Override
-//                    public void onInterstitialDisplayed(Ad ad) {
-//                        // Interstitial ad displayed callback
-//
-//                    }
-//
-//                    @Override
-//                    public void onInterstitialDismissed(Ad ad) {
-//                        // Interstitial dismissed callback
+                InterstitialAdListener interstitialAdListener = new InterstitialAdListener() {
+                    @Override
+                    public void onInterstitialDisplayed(Ad ad) {
+                        // Interstitial ad displayed callback
+                        progressDialog.dismiss();
+                    }
+
+                    @Override
+                    public void onInterstitialDismissed(Ad ad) {
+                        // Interstitial dismissed callback
 //                        startActivity(new Intent(safeplaces.this, MainActivity.class));
 //                        progressDialog.dismiss();
-//                    }
-//
-//                    @Override
-//                    public void onError(Ad ad, AdError adError) {
-//                        // Ad error callback
-//
-//                    }
-//
-//                    @Override
-//                    public void onAdLoaded(Ad ad) {
-//                        // Interstitial ad is loaded and ready to be displayed
-//
-//                        // Show the ad
-//                        interstitialAd.show();
-//                    }
-//
-//                    @Override
-//                    public void onAdClicked(Ad ad) {
-//                        // Ad clicked callback
-//
-//                    }
-//
-//                    @Override
-//                    public void onLoggingImpression(Ad ad) {
-//                        // Ad impression logged callback
-//
-//                    }
-//                };
-//                progressDialog = new ProgressDialog(safeplaces.this);
-//                progressDialog.show();
-//                progressDialog.setContentView(R.layout.progress_dialog);
-//                progressDialog.getWindow().setBackgroundDrawableResource(
-//                        android.R.color.transparent
-//                );
-//
-//                interstitialAd.loadAd(
-//                        interstitialAd.buildLoadAdConfig()
-//                                .withAdListener(interstitialAdListener)
-//                                .build());
-                startActivity(new Intent(safeplaces.this, MainActivity.class));
+                    }
+
+                    @Override
+                    public void onError(Ad ad, AdError adError) {
+                        // Ad error callback
+
+                    }
+
+                    @Override
+                    public void onAdLoaded(Ad ad) {
+                        // Interstitial ad is loaded and ready to be displayed
+
+                        startActivity(new Intent(safeplaces.this, MainActivity.class));
+                        // Show the ad
+                        interstitialAd.show();
+                    }
+
+                    @Override
+                    public void onAdClicked(Ad ad) {
+                        // Ad clicked callback
+
+                    }
+
+                    @Override
+                    public void onLoggingImpression(Ad ad) {
+                        // Ad impression logged callback
+
+                    }
+                };
+
+                progressDialog = new ProgressDialog(safeplaces.this);
+                progressDialog.show();
+                progressDialog.setContentView(R.layout.progress_dialog);
+                progressDialog.getWindow().setBackgroundDrawableResource(
+                        android.R.color.transparent
+                );
+                interstitialAd.loadAd(
+                        interstitialAd.buildLoadAdConfig()
+                                .withAdListener(interstitialAdListener)
+                                .build());
+
 
 
             }
@@ -217,10 +227,10 @@ TextView spt;
         });
 
         spt=findViewById(R.id.sptxt);
-        String para = "●Try to get into stars or double your pieces into a place.\n" +
-                "●At your second last or last star, run only if you got at least 6 and 4 " +
+        String para = "●\tTry to get into stars or double your pieces into a place.\n" +
+                "●\tAt your second last or last star, run only if you got at least 6 and 4 " +
                 "respectively as far as possible if there are other opponents behind.\n" +
-                "●That way, you can get to the home safer"+
+                "●\tThat way, you can get to the home safer"+
                 "\n"+
                 "\n";
         spt.setText(para);

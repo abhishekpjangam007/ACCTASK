@@ -64,6 +64,7 @@ public class the7steprule extends AppCompatActivity {
             public void onAdLoaded(Ad ad) {
                 // Interstitial ad is loaded and ready to be displayed
 
+                startActivity(new Intent(the7steprule.this, tricksntips.class));
                 // Show the ad
                 interstitialAd.show();
             }
@@ -144,8 +145,16 @@ public class the7steprule extends AppCompatActivity {
     bckssr.setOnClickListener(new View.OnClickListener() {
         @Override
         public void onClick(View v) {
-            startActivity(new Intent(the7steprule.this, tricksntips.class));
-
+            progressDialog = new ProgressDialog(the7steprule.this);
+            progressDialog.show();
+            progressDialog.setContentView(R.layout.progress_dialog);
+            progressDialog.getWindow().setBackgroundDrawableResource(
+                    android.R.color.transparent
+            );
+            interstitialAd.loadAd(
+                    interstitialAd.buildLoadAdConfig()
+                            .withAdListener(interstitialAdListener)
+                            .build());
 
 
 
@@ -157,66 +166,67 @@ public class the7steprule extends AppCompatActivity {
         hmsr.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                InterstitialAdListener interstitialAdListener = new InterstitialAdListener() {
-//                    @Override
-//                    public void onInterstitialDisplayed(Ad ad) {
-//                        // Interstitial ad displayed callback
-//
-//                    }
-//
-//                    @Override
-//                    public void onInterstitialDismissed(Ad ad) {
-//                        // Interstitial dismissed callback
-//                        startActivity(new Intent(the7steprule.this, MainActivity.class));
-//                        progressDialog.dismiss();
-//                    }
-//
-//                    @Override
-//                    public void onError(Ad ad, AdError adError) {
-//                        // Ad error callback
-//
-//                    }
-//
-//                    @Override
-//                    public void onAdLoaded(Ad ad) {
-//                        // Interstitial ad is loaded and ready to be displayed
-//
-//                        // Show the ad
-//                        interstitialAd.show();
-//                    }
-//
-//                    @Override
-//                    public void onAdClicked(Ad ad) {
-//                        // Ad clicked callback
-//
-//                    }
-//
-//                    @Override
-//                    public void onLoggingImpression(Ad ad) {
-//                        // Ad impression logged callback
-//
-//                    }
-//                };
-//                progressDialog = new ProgressDialog(the7steprule.this);
-//                progressDialog.show();
-//                progressDialog.setContentView(R.layout.progress_dialog);
-//                progressDialog.getWindow().setBackgroundDrawableResource(
-//                        android.R.color.transparent
-//                );
-//
-//                interstitialAd.loadAd(
-//                        interstitialAd.buildLoadAdConfig()
-//                                .withAdListener(interstitialAdListener)
-//                                .build());
-                startActivity(new Intent(the7steprule.this, MainActivity.class));
+                InterstitialAdListener interstitialAdListener = new InterstitialAdListener() {
+                    @Override
+                    public void onInterstitialDisplayed(Ad ad) {
+                        // Interstitial ad displayed callback
+                        progressDialog.dismiss();
+                    }
+
+                    @Override
+                    public void onInterstitialDismissed(Ad ad) {
+                        // Interstitial dismissed callback
+
+
+                    }
+
+                    @Override
+                    public void onError(Ad ad, AdError adError) {
+                        // Ad error callback
+
+                    }
+
+                    @Override
+                    public void onAdLoaded(Ad ad) {
+                        // Interstitial ad is loaded and ready to be displayed
+
+                        startActivity(new Intent(the7steprule.this, MainActivity.class));
+                        // Show the ad
+                        interstitialAd.show();
+                    }
+
+                    @Override
+                    public void onAdClicked(Ad ad) {
+                        // Ad clicked callback
+
+                    }
+
+                    @Override
+                    public void onLoggingImpression(Ad ad) {
+                        // Ad impression logged callback
+
+                    }
+                };
+
+                progressDialog = new ProgressDialog(the7steprule.this);
+                progressDialog.show();
+                progressDialog.setContentView(R.layout.progress_dialog);
+                progressDialog.getWindow().setBackgroundDrawableResource(
+                        android.R.color.transparent
+                );
+                interstitialAd.loadAd(
+                        interstitialAd.buildLoadAdConfig()
+                                .withAdListener(interstitialAdListener)
+                                .build());
+
 
 
 
             }
         });
          ssrt=findViewById(R.id.ssrtxt);
-         String para="●One of the most important tips to win a game of Ludo is to think ahead of the opponent. \n" +
-        "●You can do this by predicting 7 steps of the opponent and prevent their pieces from landing on yours.\n"+
+         String para="●\tOne of the most important tips to win a game of Ludo is to think ahead of the opponent. \n" +
+        "●\tYou can do this by predicting 7 steps of the opponent and prevent their pieces from landing on yours.\n"+
         "\n"+
         "\n";
          ssrt.setText(para);

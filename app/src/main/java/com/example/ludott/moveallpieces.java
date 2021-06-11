@@ -63,6 +63,7 @@ public class moveallpieces extends AppCompatActivity {
             @Override
             public void onAdLoaded(Ad ad) {
                 // Interstitial ad is loaded and ready to be displayed
+                startActivity(new Intent(moveallpieces.this, tricksntips.class));
 
                 // Show the ad
                 interstitialAd.show();
@@ -142,19 +143,19 @@ public class moveallpieces extends AppCompatActivity {
         mapbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(moveallpieces.this, tricksntips.class));
-//                progressDialog.dismiss();
-//                progressDialog = new ProgressDialog(moveallpieces.this);
-//                progressDialog.show();
-//                progressDialog.setContentView(R.layout.progress_dialog);
-//                progressDialog.getWindow().setBackgroundDrawableResource(
-//                        android.R.color.transparent
-//                );
+
 //
-//                interstitialAd.loadAd(
-//                        interstitialAd.buildLoadAdConfig()
-//                                .withAdListener(interstitialAdListener)
-//                                .build());
+                progressDialog.dismiss();
+                progressDialog = new ProgressDialog(moveallpieces.this);
+                progressDialog.show();
+                progressDialog.setContentView(R.layout.progress_dialog);
+                progressDialog.getWindow().setBackgroundDrawableResource(
+                        android.R.color.transparent
+                );
+                interstitialAd.loadAd(
+                        interstitialAd.buildLoadAdConfig()
+                                .withAdListener(interstitialAdListener)
+                                .build());
             }
         });
 
@@ -163,64 +164,65 @@ public class moveallpieces extends AppCompatActivity {
         hmm.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                InterstitialAdListener interstitialAdListener = new InterstitialAdListener() {
-//                    @Override
-//                    public void onInterstitialDisplayed(Ad ad) {
-//                        // Interstitial ad displayed callback
-//
-//                    }
-//
-//                    @Override
-//                    public void onInterstitialDismissed(Ad ad) {
-//                        // Interstitial dismissed callback
+                InterstitialAdListener interstitialAdListener = new InterstitialAdListener() {
+                    @Override
+                    public void onInterstitialDisplayed(Ad ad) {
+                        // Interstitial ad displayed callback
+                        progressDialog.dismiss();
+                    }
+
+                    @Override
+                    public void onInterstitialDismissed(Ad ad) {
+                        // Interstitial dismissed callback
 //                        startActivity(new Intent(moveallpieces.this, MainActivity.class));
-//                        progressDialog.dismiss();
-//                    }
-//
-//                    @Override
-//                    public void onError(Ad ad, AdError adError) {
-//                        // Ad error callback
-//
-//                    }
-//
-//                    @Override
-//                    public void onAdLoaded(Ad ad) {
-//                        // Interstitial ad is loaded and ready to be displayed
-//
-//                        // Show the ad
-//                        interstitialAd.show();
-//                    }
-//
-//                    @Override
-//                    public void onAdClicked(Ad ad) {
-//                        // Ad clicked callback
-//
-//                    }
-//
-//                    @Override
-//                    public void onLoggingImpression(Ad ad) {
-//                        // Ad impression logged callback
-//
-//                    }
-//                };
-//                progressDialog = new ProgressDialog(moveallpieces.this);
-//                progressDialog.show();
-//                progressDialog.setContentView(R.layout.progress_dialog);
-//                progressDialog.getWindow().setBackgroundDrawableResource(
-//                        android.R.color.transparent
-//                );
-//
-//                interstitialAd.loadAd(
-//                        interstitialAd.buildLoadAdConfig()
-//                                .withAdListener(interstitialAdListener)
-//                                .build());
-                startActivity(new Intent(moveallpieces.this, MainActivity.class));
+
+                    }
+
+                    @Override
+                    public void onError(Ad ad, AdError adError) {
+                        // Ad error callback
+
+                    }
+
+                    @Override
+                    public void onAdLoaded(Ad ad) {
+                        // Interstitial ad is loaded and ready to be displayed
+
+                        startActivity(new Intent(moveallpieces.this, MainActivity.class));
+                        // Show the ad
+                        interstitialAd.show();
+                    }
+
+                    @Override
+                    public void onAdClicked(Ad ad) {
+                        // Ad clicked callback
+
+                    }
+
+                    @Override
+                    public void onLoggingImpression(Ad ad) {
+                        // Ad impression logged callback
+
+                    }
+                };
+
+                progressDialog = new ProgressDialog(moveallpieces.this);
+                progressDialog.show();
+                progressDialog.setContentView(R.layout.progress_dialog);
+                progressDialog.getWindow().setBackgroundDrawableResource(
+                        android.R.color.transparent
+                );
+                interstitialAd.loadAd(
+                        interstitialAd.buildLoadAdConfig()
+                                .withAdListener(interstitialAdListener)
+                                .build());
+
 
             }
         });
     mapt=findViewById(R.id.maptxt);
-    String para ="●Always keep in mind, don't just focus on one piece.\n" +
-            "●Make sure you move all your pieces equally and try scattering " +
+    String para ="●\tAlways keep in mind, don't just focus on one piece.\n" +
+            "●\tMake sure you move all your pieces equally and try scattering " +
             "your pieces everywhere in the board.move a piece which is far from" +
             "your opponent so that it does not get killed."+
             "\n"+
@@ -228,11 +230,7 @@ public class moveallpieces extends AppCompatActivity {
     mapt.setText(para);
     mapt.setMovementMethod(new ScrollingMovementMethod());
     }
-    private void DisplayInterstitialAd () {
-        if (UnityAds.isReady(interstatial_id)){
-            UnityAds.show(moveallpieces.this,interstatial_id);
-        }
-    }
+
 
     @Override
     public void onBackPressed() {

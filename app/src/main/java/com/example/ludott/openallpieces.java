@@ -65,6 +65,7 @@ TextView oapt;
             public void onAdLoaded(Ad ad) {
                 // Interstitial ad is loaded and ready to be displayed
 
+                startActivity(new Intent(openallpieces.this, tricksntips.class));
                 // Show the ad
                 interstitialAd.show();
             }
@@ -143,7 +144,18 @@ TextView oapt;
         bckoap.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(openallpieces.this, tricksntips.class));
+
+                progressDialog = new ProgressDialog(openallpieces.this);
+                progressDialog.show();
+                progressDialog.setContentView(R.layout.progress_dialog);
+                progressDialog.getWindow().setBackgroundDrawableResource(
+                        android.R.color.transparent
+                );
+
+                interstitialAd.loadAd(
+                        interstitialAd.buildLoadAdConfig()
+                                .withAdListener(interstitialAdListener)
+                                .build());
 
 
 
@@ -156,66 +168,69 @@ TextView oapt;
         hmo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                InterstitialAdListener interstitialAdListener = new InterstitialAdListener() {
-//                    @Override
-//                    public void onInterstitialDisplayed(Ad ad) {
-//                        // Interstitial ad displayed callback
-//                        // Log.e(TAG, "Interstitial ad displayed.");
-//                    }
-//
-//                    @Override
-//                    public void onInterstitialDismissed(Ad ad) {
-//                        // Interstitial dismissed callback
-//                        //  Log.e(TAG, "Interstitial ad dismissed.");
+                InterstitialAdListener interstitialAdListener = new InterstitialAdListener() {
+                    @Override
+                    public void onInterstitialDisplayed(Ad ad) {
+                        // Interstitial ad displayed callback
+                        // Log.e(TAG, "Interstitial ad displayed.");
+                        progressDialog.dismiss();
+                    }
+
+                    @Override
+                    public void onInterstitialDismissed(Ad ad) {
+                        // Interstitial dismissed callback
+                        //  Log.e(TAG, "Interstitial ad dismissed.");
 //                        startActivity(new Intent(openallpieces.this, MainActivity.class));
-//                        progressDialog.dismiss();
-//                    }
-//
-//                    @Override
-//                    public void onError(Ad ad, AdError adError) {
-//                        // Ad error callback
-//                        //   Log.e(TAG, "Interstitial ad failed to load: " + adError.getErrorMessage());
-//                    }
-//
-//                    @Override
-//                    public void onAdLoaded(Ad ad) {
-//                        // Interstitial ad is loaded and ready to be displayed
-//                        //  Log.d(TAG, "Interstitial ad is loaded and ready to be displayed!");
-//                        // Show the ad
-//                        interstitialAd.show();
-//                    }
-//
-//                    @Override
-//                    public void onAdClicked(Ad ad) {
-//                        // Ad clicked callback
-//                        //  Log.d(TAG, "Interstitial ad clicked!");
-//                    }
-//
-//                    @Override
-//                    public void onLoggingImpression(Ad ad) {
-//                        // Ad impression logged callback
-//                        // Log.d(TAG, "Interstitial ad impression logged!");
-//                    }
-//                };
-//                progressDialog = new ProgressDialog(openallpieces.this);
-//                progressDialog.show();
-//                progressDialog.setContentView(R.layout.progress_dialog);
-//                progressDialog.getWindow().setBackgroundDrawableResource(
-//                        android.R.color.transparent
-//                );
-//
-//                interstitialAd.loadAd(
-//                        interstitialAd.buildLoadAdConfig()
-//                                .withAdListener(interstitialAdListener)
-//                                .build());
-                startActivity(new Intent(openallpieces.this, MainActivity.class));
+
+                    }
+
+                    @Override
+                    public void onError(Ad ad, AdError adError) {
+                        // Ad error callback
+                        //   Log.e(TAG, "Interstitial ad failed to load: " + adError.getErrorMessage());
+                    }
+
+                    @Override
+                    public void onAdLoaded(Ad ad) {
+                        // Interstitial ad is loaded and ready to be displayed
+                        //  Log.d(TAG, "Interstitial ad is loaded and ready to be displayed!");
+
+                        startActivity(new Intent(openallpieces.this, MainActivity.class));
+                        // Show the ad
+                        interstitialAd.show();
+                    }
+
+                    @Override
+                    public void onAdClicked(Ad ad) {
+                        // Ad clicked callback
+                        //  Log.d(TAG, "Interstitial ad clicked!");
+                    }
+
+                    @Override
+                    public void onLoggingImpression(Ad ad) {
+                        // Ad impression logged callback
+                        // Log.d(TAG, "Interstitial ad impression logged!");
+                    }
+                };
+
+                progressDialog = new ProgressDialog(openallpieces.this);
+                progressDialog.show();
+                progressDialog.setContentView(R.layout.progress_dialog);
+                progressDialog.getWindow().setBackgroundDrawableResource(
+                        android.R.color.transparent
+                );
+                interstitialAd.loadAd(
+                        interstitialAd.buildLoadAdConfig()
+                                .withAdListener(interstitialAdListener)
+                                .build());
+
 
 
             }
         });
 
         oapt=findViewById(R.id.oaptxt);
-        String para = "●The most important tip to win Ludo King is to open all " +
+        String para = "●\tThe most important tip to win Ludo King is to open all " +
                 "your pieces ASAP.Get all your pieces out as soon as possible."+
                 "\n"+
                 "\n";

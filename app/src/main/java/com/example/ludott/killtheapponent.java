@@ -64,7 +64,13 @@ TextView kta;
             @Override
             public void onAdLoaded(Ad ad) {
                 // Interstitial ad is loaded and ready to be displayed
-
+//                progressDialog = new ProgressDialog(killtheapponent.this);
+//                progressDialog.show();
+//                progressDialog.setContentView(R.layout.progress_dialog);
+//                progressDialog.getWindow().setBackgroundDrawableResource(
+//                        android.R.color.transparent
+//                );
+                startActivity(new Intent(killtheapponent.this, tricksntips.class));
                 // Show the ad
                 interstitialAd.show();
             }
@@ -146,18 +152,17 @@ TextView kta;
         @Override
         public void onClick(View v) {
 
-//            progressDialog = new ProgressDialog(killtheapponent.this);
-//            progressDialog.show();
-//            progressDialog.setContentView(R.layout.progress_dialog);
-//            progressDialog.getWindow().setBackgroundDrawableResource(
-//                    android.R.color.transparent
-//            );
-//
-//            interstitialAd.loadAd(
-//                    interstitialAd.buildLoadAdConfig()
-//                            .withAdListener(interstitialAdListener)
-//                            .build());
-            startActivity(new Intent(killtheapponent.this, tricksntips.class));
+            progressDialog = new ProgressDialog(killtheapponent.this);
+                progressDialog.show();
+                progressDialog.setContentView(R.layout.progress_dialog);
+                progressDialog.getWindow().setBackgroundDrawableResource(
+                        android.R.color.transparent
+                );
+            interstitialAd.loadAd(
+                    interstitialAd.buildLoadAdConfig()
+                            .withAdListener(interstitialAdListener)
+                            .build());
+
 
         }});
 
@@ -166,58 +171,64 @@ TextView kta;
         hmk.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                InterstitialAdListener interstitialAdListener = new InterstitialAdListener() {
-//                    @Override
-//                    public void onInterstitialDisplayed(Ad ad) {
-//                        // Interstitial ad displayed callback
-//
-//                    }
-//
-//                    @Override
-//                    public void onInterstitialDismissed(Ad ad) {
-//                        // Interstitial dismissed callback
+                InterstitialAdListener interstitialAdListener = new InterstitialAdListener() {
+                    @Override
+                    public void onInterstitialDisplayed(Ad ad) {
+                        // Interstitial ad displayed callback
+
+                    }
+
+                    @Override
+                    public void onInterstitialDismissed(Ad ad) {
+                        // Interstitial dismissed callback
 //                        startActivity(new Intent(killtheapponent.this, MainActivity.class));
-//                        progressDialog.dismiss();
-//                    }
-//
-//                    @Override
-//                    public void onError(Ad ad, AdError adError) {
-//                        // Ad error callback
-//
-//                    }
-//
-//                    @Override
-//                    public void onAdLoaded(Ad ad) {
-//                        // Interstitial ad is loaded and ready to be displayed
-//
-//                        // Show the ad
-//                        interstitialAd.show();
-//                    }
-//
-//                    @Override
-//                    public void onAdClicked(Ad ad) {
-//                        // Ad clicked callback
-//
-//                    }
-//
-//                    @Override
-//                    public void onLoggingImpression(Ad ad) {
-//                        // Ad impression logged callback
-//
-//                    }
-//                };
-//                progressDialog = new ProgressDialog(killtheapponent.this);
-//                progressDialog.show();
-//                progressDialog.setContentView(R.layout.progress_dialog);
-//                progressDialog.getWindow().setBackgroundDrawableResource(
-//                        android.R.color.transparent
-//                );
-//
-//                interstitialAd.loadAd(
-//                        interstitialAd.buildLoadAdConfig()
-//                                .withAdListener(interstitialAdListener)
-//                                .build());
-                startActivity(new Intent(killtheapponent.this, MainActivity.class));
+                        progressDialog.dismiss();
+                    }
+
+                    @Override
+                    public void onError(Ad ad, AdError adError) {
+                        // Ad error callback
+
+                    }
+
+                    @Override
+                    public void onAdLoaded(Ad ad) {
+                        // Interstitial ad is loaded and ready to be displayed
+//                        progressDialog = new ProgressDialog(killtheapponent.this);
+//                        progressDialog.show();
+//                        progressDialog.setContentView(R.layout.progress_dialog);
+//                        progressDialog.getWindow().setBackgroundDrawableResource(
+//                                android.R.color.transparent
+//                        );
+                        startActivity(new Intent(killtheapponent.this, MainActivity.class));
+                        // Show the ad
+                        interstitialAd.show();
+                    }
+
+                    @Override
+                    public void onAdClicked(Ad ad) {
+                        // Ad clicked callback
+
+                    }
+
+                    @Override
+                    public void onLoggingImpression(Ad ad) {
+                        // Ad impression logged callback
+
+                    }
+                };
+
+                progressDialog = new ProgressDialog(killtheapponent.this);
+                progressDialog.show();
+                progressDialog.setContentView(R.layout.progress_dialog);
+                progressDialog.getWindow().setBackgroundDrawableResource(
+                        android.R.color.transparent
+                );
+                interstitialAd.loadAd(
+                        interstitialAd.buildLoadAdConfig()
+                                .withAdListener(interstitialAdListener)
+                                .build());
+
 
 //                mediaplayer.start();
 //                if (mediaplayer==mediaplayer)
@@ -253,10 +264,10 @@ TextView kta;
         });
 
         kta = findViewById(R.id.ktatxt);
-        String para="•Killing opponents is always exciting even at your own piece’s risk but\n" +
-                "•you need to calculate risk before killing anyone.\n" +
-                "•If you have an option to kill one of many opponents,\n" +
-                "•choose the ones that have reached far from the start point.\n"+
+        String para="●\tKilling opponents is always exciting even at your own piece’s risk but\n" +
+                "●\tyou need to calculate risk before killing anyone.\n" +
+                "●\tIf you have an option to kill one of many opponents,\n" +
+                "●\tchoose the ones that have reached far from the start point.\n"+
                 "\n";
         kta.setText(para);
         kta.setMovementMethod(new ScrollingMovementMethod());

@@ -51,7 +51,7 @@
         android:layout_marginBottom="@dimen/_25sdp"
         android:scrollbars="vertical"
         android:text=""
-        android:gravity="center"
+        android:gravity="left"
         android:textColor="@color/black"
         android:textSize="@dimen/_15sdp"
         app:layout_constraintBottom_toBottomOf="@+id/imageView12"

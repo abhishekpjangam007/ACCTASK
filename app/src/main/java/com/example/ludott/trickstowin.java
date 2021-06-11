@@ -62,6 +62,7 @@ public class trickstowin extends AppCompatActivity {
             public void onAdLoaded(Ad ad) {
                 // Interstitial ad is loaded and ready to be displayed
 
+                startActivity(new Intent(trickstowin.this, rules.class));
                 // Show the ad
                 interstitialAd.show();
             }
@@ -78,17 +79,12 @@ public class trickstowin extends AppCompatActivity {
 
             }
         };
-        progressDialog = new ProgressDialog(trickstowin.this);
-        progressDialog.show();
-        progressDialog.setContentView(R.layout.progress_dialog);
-        progressDialog.getWindow().setBackgroundDrawableResource(
-                android.R.color.transparent
-        );
 
-        interstitialAd.loadAd(
-                interstitialAd.buildLoadAdConfig()
-                        .withAdListener(interstitialAdListener)
-                        .build());
+
+//        interstitialAd.loadAd(
+//                interstitialAd.buildLoadAdConfig()
+//                        .withAdListener(interstitialAdListener)
+//                        .build());
         ////////
         UnityAds.initialize(trickstowin.this,unityGameID,testMode);
         IUnityAdsListener unityAdsListener = new IUnityAdsListener() {
@@ -155,18 +151,19 @@ public class trickstowin extends AppCompatActivity {
         backk.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(trickstowin.this, rules.class));
-//                progressDialog = new ProgressDialog(trickstowin.this);
-//                progressDialog.show();
-//                progressDialog.setContentView(R.layout.progress_dialog);
-//                progressDialog.getWindow().setBackgroundDrawableResource(
-//                        android.R.color.transparent
-//                );
+
 //
-//                interstitialAd.loadAd(
-//                        interstitialAd.buildLoadAdConfig()
-//                                .withAdListener(interstitialAdListener)
-//                                .build());
+//
+                progressDialog = new ProgressDialog(trickstowin.this);
+                progressDialog.show();
+                progressDialog.setContentView(R.layout.progress_dialog);
+                progressDialog.getWindow().setBackgroundDrawableResource(
+                        android.R.color.transparent
+                );
+                interstitialAd.loadAd(
+                        interstitialAd.buildLoadAdConfig()
+                                .withAdListener(interstitialAdListener)
+                                .build());
 
 
             }
@@ -197,14 +194,14 @@ public class trickstowin extends AppCompatActivity {
                     @Override
                     public void onInterstitialDisplayed(Ad ad) {
                         // Interstitial ad displayed callback
-
+                        progressDialog.dismiss();
                     }
 
                     @Override
                     public void onInterstitialDismissed(Ad ad) {
                         // Interstitial dismissed callback
-                        startActivity(new Intent(trickstowin.this, MainActivity.class));
-                        progressDialog.dismiss();
+
+//                        progressDialog.dismiss();
                     }
 
                     @Override
@@ -217,6 +214,8 @@ public class trickstowin extends AppCompatActivity {
                     public void onAdLoaded(Ad ad) {
                         // Interstitial ad is loaded and ready to be displayed
 
+
+                        startActivity(new Intent(trickstowin.this, MainActivity.class));
                         // Show the ad
                         interstitialAd.show();
                     }
@@ -239,7 +238,6 @@ public class trickstowin extends AppCompatActivity {
                 progressDialog.getWindow().setBackgroundDrawableResource(
                         android.R.color.transparent
                 );
-
                 interstitialAd.loadAd(
                         interstitialAd.buildLoadAdConfig()
                                 .withAdListener(interstitialAdListener)

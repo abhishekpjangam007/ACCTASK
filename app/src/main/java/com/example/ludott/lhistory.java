@@ -51,8 +51,7 @@ TextView lhis;
             @Override
             public void onInterstitialDismissed(Ad ad) {
                 // Interstitial dismissed callback
-//                Intent intent = new Intent(lhistory.this,history.class);
-//                startActivity(intent);
+                progressDialog.dismiss();
 
             }
 
@@ -65,8 +64,14 @@ TextView lhis;
             @Override
             public void onAdLoaded(Ad ad) {
                 // Interstitial ad is loaded and ready to be displayed
-
-
+//                progressDialog = new ProgressDialog(lhistory.this);
+//                progressDialog.show();
+//                progressDialog.setContentView(R.layout.progress_dialog);
+//                progressDialog.getWindow().setBackgroundDrawableResource(
+//                        android.R.color.transparent
+//                );
+                Intent intent = new Intent(lhistory.this,history.class);
+                startActivity(intent);
                 // Show the ad
                 interstitialAd.show();
             }
@@ -83,17 +88,8 @@ TextView lhis;
 
             }
         };
-//        progressDialog = new ProgressDialog(lhistory.this);
-//        progressDialog.show();
-//        progressDialog.setContentView(R.layout.progress_dialog);
-//        progressDialog.getWindow().setBackgroundDrawableResource(
-//                android.R.color.transparent
-//        );
-//
-//        interstitialAd.loadAd(
-//                interstitialAd.buildLoadAdConfig()
-//                        .withAdListener(interstitialAdListener)
-//                        .build());
+
+
         /////////////////////////////////////////////////////////////////////////////////
         UnityAds.initialize(lhistory.this,unityGameID,testMode);
         IUnityAdsListener unityAdsListener = new IUnityAdsListener() {
@@ -159,30 +155,31 @@ TextView lhis;
         bckhi.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(lhistory.this, history.class));
-//                progressDialog = new ProgressDialog(lhistory.this);
-//                progressDialog.show();
-//                progressDialog.setContentView(R.layout.progress_dialog);
-//                progressDialog.getWindow().setBackgroundDrawableResource(
-//                        android.R.color.transparent
-//                );
+
+
 //
-//                interstitialAd.loadAd(
-//                        interstitialAd.buildLoadAdConfig()
-//                                .withAdListener(interstitialAdListener)
-//                                .build());
+                progressDialog = new ProgressDialog(lhistory.this);
+                progressDialog.show();
+                progressDialog.setContentView(R.layout.progress_dialog);
+                progressDialog.getWindow().setBackgroundDrawableResource(
+                        android.R.color.transparent
+                );
+                interstitialAd.loadAd(
+                        interstitialAd.buildLoadAdConfig()
+                                .withAdListener(interstitialAdListener)
+                                .build());
 
 
            }
         });
 
         lhis=findViewById(R.id.lhis);
-        String para="●Ludo is a traditional board gametypically of a square shapedthat originated from India.\n" +
-                "●The name Ludo came from England in 1896.\n" +
-                "●In this game the players race their four pieces from start to end according to the rolls of a die.\n" +
-                "●Cross and circle board game that originated in Ancient India also known as Pachisi It was created in India in the 6th century.\n" +
-                "●Pachisi was played by  Mughal Emperor Jalal-ud-din Muhammad Akbar .\n" +
-                "●Ludo was formed with the intention of bringing better quality, gameplay and a modern touch to a game many families already know and enjoy.\n";
+        String para="●\tLudo is a traditional board gametypically of a square shapedthat originated from India.\n" +
+                "●\tThe name Ludo came from England in 1896.\n" +
+                "●\tIn this game the players race their four pieces from start to end according to the rolls of a die.\n" +
+                "●\tCross and circle board game that originated in Ancient India also known as Pachisi It was created in India in the 6th century.\n" +
+                "●\tPachisi was played by  Mughal Emperor Jalal-ud-din Muhammad Akbar .\n" +
+                "●\tLudo was formed with the intention of bringing better quality, gameplay and a modern touch to a game many families already know and enjoy.\n";
         lhis.setText(para);
         lhis.setMovementMethod(new ScrollingMovementMethod());
     }
